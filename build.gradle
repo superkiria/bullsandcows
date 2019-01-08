@@ -40,5 +40,45 @@ checkstyle {
 }
 
 jar {
-    manifest { attributes 'Main-Class': 'bullsandcows.App' }
+    manifest { 
+        attributes 'Main-Class': 'bullsandcows.App' 
+    }
+
+    from {
+        configurations.compile.collect { 
+            it.isDirectory() ? it : zipTree(it) 
+        }
+    }
+}
+
+task uberJar(type: Jar) {
+    appendix = 'uber'
+
+    manifest { 
+        attributes 'Main-Class': 'bullsandcows.App' 
+    }
+
+    from sourceSets.main.output
+
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/resources']
+        }
+    }
+    test {
+        resources {
+            srcDirs = ['src/resources']
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.springframework:spring-core:5.0.2.RELEASE'
 }

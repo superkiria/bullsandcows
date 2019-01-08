@@ -4,6 +4,18 @@ import static java.lang.Math.min;
 
 public class BullsAndCows {
 
+    private static String correctSymbols = "qwertyuiopasdfghjklzxcvbnmйцукенгшщзхъфывапролджэячсмитьбюё";
+
+    public static boolean isCorrectGuess(String guess) {
+        char[] array = guess.toCharArray();
+        for (Character c : array) {
+            if (! correctSymbols.contains(c.toString())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public static int countBulls(String a, String b) {
         int count = 0;
         char[] arrayA = a.toCharArray();

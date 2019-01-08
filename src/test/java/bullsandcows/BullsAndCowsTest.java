@@ -3,6 +3,7 @@ package bullsandcows;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class BullsAndCowsTest {
     @Test public void countBulls01() {
@@ -71,5 +72,21 @@ public class BullsAndCowsTest {
 
     @Test public void countCows10() {
         assertTrue(3 == BullsAndCows.countCows("aba", "aac"));
+    }
+
+    @Test public void isCorrectGuess01() {
+        assertTrue(BullsAndCows.isCorrectGuess("abcdefghijklmnopqrstuvwxyz"));
+    }
+    
+    @Test public void isCorrectGuess02() {
+        assertFalse(BullsAndCows.isCorrectGuess("abcdefghijklm0123456789nopqrstuvwxyz"));
+    }
+    
+    @Test public void isCorrectGuess03() {
+        assertFalse(BullsAndCows.isCorrectGuess("a c e g i k m o q s u w y"));
+    }
+    
+    @Test public void isCorrectGuess04() {
+        assertTrue(BullsAndCows.isCorrectGuess("йцукенгшщзхъфывапролджэячсмитьбю"));
     }
 }
